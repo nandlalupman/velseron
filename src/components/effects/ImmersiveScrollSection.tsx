@@ -23,8 +23,8 @@ interface ImmersiveScrollSectionProps {
 export function ImmersiveScrollSection({
   children,
   className,
-  scaleFactor = 0.95,
-  fadeFactor = 0.3,
+  scaleFactor = 0.75,
+  fadeFactor = 0.1,
 }: ImmersiveScrollSectionProps) {
   const containerRef = useRef<HTMLDivElement>(null);
 

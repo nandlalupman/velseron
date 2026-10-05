@@ -81,7 +81,7 @@ export default function HomePage() {
           {/* Right: 3D Coin — spans 7 cols */}
           <div className="lg:col-span-7 flex items-center justify-center">
             <Reveal delay={0.15}>
-              <HeroStage metal="gold" className="w-full max-w-[520px]" />
+              <HeroStage className="w-full max-w-[600px] lg:-mr-12" />
             </Reveal>
           </div>
         </div>
@@ -98,12 +98,12 @@ export default function HomePage() {
       {/* ═══════════════════════════════════════════════
           2. METAL SELECTOR — full-width split (Immersive Scroll)
          ═══════════════════════════════════════════════ */}
-      <ImmersiveScrollSection>
-        <section className="grid grid-cols-1 md:grid-cols-2">
+      <ImmersiveScrollSection scaleFactor={0.75} fadeFactor={0.1}>
+        <section className="grid grid-cols-1 md:grid-cols-2 min-h-[85vh]">
         {/* Gold half */}
         <Link
           href="/gold"
-          className="group relative flex flex-col items-center justify-center py-24 md:py-32 bg-ink-1 hover:bg-ink-2 transition-colors duration-[var(--dur-md)] overflow-hidden"
+          className="group relative flex flex-col items-center justify-center p-12 bg-ink-1 hover:bg-ink-2 transition-colors duration-[var(--dur-md)] overflow-hidden"
         >
           <div
             className="absolute inset-0 pointer-events-none"
@@ -131,7 +131,7 @@ export default function HomePage() {
         {/* Silver half */}
         <Link
           href="/silver"
-          className="group relative flex flex-col items-center justify-center py-24 md:py-32 bg-steel-1 hover:bg-steel-2 transition-colors duration-[var(--dur-md)] overflow-hidden"
+          className="group relative flex flex-col items-center justify-center p-12 bg-steel-1 hover:bg-steel-2 transition-colors duration-[var(--dur-md)] overflow-hidden"
         >
           <div
             className="absolute inset-0 pointer-events-none"
@@ -162,7 +162,7 @@ export default function HomePage() {
           3. DIVINE DESIGNS
          ═══════════════════════════════════════════════ */}
       <section
-        className="py-section relative overflow-hidden"
+        className="py-16 relative overflow-hidden"
         style={{
           background: "linear-gradient(180deg, #1a1d24 0%, #22262e 40%, #2a2e36 100%)",
         }}
@@ -174,18 +174,18 @@ export default function HomePage() {
             background: "radial-gradient(ellipse at 50% 30%, rgba(196,202,210,0.06) 0%, transparent 60%)",
           }}
         />
-        <div className="max-w-[var(--grid-max)] mx-auto px-[var(--grid-gutter)] mb-12">
+        <div className="max-w-[var(--grid-max)] mx-auto px-[var(--grid-gutter)] mb-8 mt-4">
           <Reveal>
-            <p className="font-mono-label text-accent mb-4 text-[10px]">
+            <p className="font-mono-label text-accent mb-2 text-[10px]">
               SACRED COLLECTION
             </p>
             <h2
-              className="font-[family-name:var(--font-display)] text-ivory mb-4"
+              className="font-[family-name:var(--font-display)] text-ivory mb-2"
               style={{ fontSize: "clamp(2rem, 4vw, 3rem)" }}
             >
               Divine Designs
             </h2>
-            <p className="text-ivory-mute max-w-lg">
+            <p className="text-ivory-mute max-w-lg text-sm">
               Eternal spiritual motifs meticulously crafted into 24K gold and 999 fine silver.
             </p>
           </Reveal>
