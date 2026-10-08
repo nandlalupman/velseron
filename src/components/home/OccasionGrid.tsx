@@ -52,16 +52,19 @@ function OccasionCard({ occasion, index }: { occasion: typeof OCCASIONS[0]; inde
       aria-label={occasion.label}
     >
       {/* Image */}
-      <div className="relative aspect-[3/4] overflow-hidden bg-light-surface">
-        <Image
-          src={occasion.image}
-          alt={occasion.label}
-          fill
-          className="object-cover group-hover:scale-105 transition-transform duration-500"
-          sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 16vw"
-        />
+      <div className="relative aspect-[3/4] overflow-hidden bg-gradient-to-b from-light-surface to-slate-100 flex items-center justify-center">
+        <div className="absolute inset-0 bg-gold-500/5 mix-blend-multiply" />
+        <div className="relative w-3/4 h-3/4">
+          <Image
+            src={occasion.image}
+            alt={occasion.label}
+            fill
+            className={cn("transition-transform duration-700 group-hover:scale-110", occasion.image.endsWith(".png") ? "object-contain drop-shadow-2xl" : "object-cover !w-full !h-full absolute inset-0")}
+            sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 16vw"
+          />
+        </div>
         {/* Gradient at bottom */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
 
         {/* Overlay content */}
         <div className="absolute bottom-0 left-0 right-0 p-3">

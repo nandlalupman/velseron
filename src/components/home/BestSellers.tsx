@@ -101,11 +101,14 @@ function ProductCardHorizontal({ coin, price, index }: ProductCardHorizontalProp
     >
       <Link href={`/coins/${coin.slug}`} className="block">
         {/* Image area */}
-        <div className="relative aspect-square overflow-hidden bg-light-surface">
-          <CoinPosterSVG
-            metal={coin.metal}
-            size={220}
-            className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+        <div className={cn("relative aspect-square overflow-hidden flex items-center justify-center", isGold ? "bg-gradient-to-br from-gold-50 to-gold-100" : "bg-gradient-to-br from-slate-50 to-slate-200")}>
+          <div className="absolute inset-0 bg-white/20 mix-blend-overlay" />
+          <Image
+            src={isGold ? "/coins/card-gold-coin-clean.png" : "/coins/card-silver-coin-clean.png"}
+            alt={coin.name}
+            fill
+            className="object-contain p-6 group-hover:scale-110 group-hover:-translate-y-1 transition-transform duration-500 drop-shadow-2xl"
+            sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 15vw"
           />
 
           {/* Top badges */}
