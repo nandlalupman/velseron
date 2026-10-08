@@ -1,7 +1,9 @@
 import type { Metal } from "@/data/coins";
 
+type CoinMetal = Metal | "both";
+
 interface CoinPosterSVGProps {
-  metal: Metal;
+  metal: CoinMetal;
   size?: number;
   className?: string;
   /** Show front or back face */
@@ -21,7 +23,7 @@ export function CoinPosterSVG({
   className,
   face = "obverse",
 }: CoinPosterSVGProps) {
-  const isGold = metal === "gold";
+  const isGold = metal === "gold" || metal === "both";
 
   const bg = isGold ? "#1A1610" : "#10131A";
   const coinBody = isGold ? "#C9A24B" : "#C4CAD2";

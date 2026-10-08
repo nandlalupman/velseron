@@ -43,12 +43,20 @@ export function CartDrawer({
         </h2>
 
         {isEmpty ? (
-          <div className="flex-1 flex flex-col items-center justify-center text-center">
-            <p className="text-ivory-mute text-sm mb-6">
-              Your cart is empty.
+          <div className="flex-1 flex flex-col items-center justify-center text-center px-4">
+            <div className="w-24 h-24 mb-6 text-ivory-mute/20">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+                <circle cx="12" cy="12" r="3" />
+                <path d="M15 12h3M6 12h3" />
+              </svg>
+            </div>
+            <h3 className="text-ivory font-display text-xl mb-2">Your vault is empty</h3>
+            <p className="text-ivory-mute text-sm mb-8 max-w-xs">
+              Discover our collection of premium gold and silver bullion.
             </p>
-            <Button variant="secondary" onClick={onClose}>
-              Continue browsing
+            <Button variant="primary" onClick={onClose} className="w-full max-w-[200px]">
+              Start Exploring
             </Button>
           </div>
         ) : (

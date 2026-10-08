@@ -4,10 +4,10 @@
  */
 
 export const BRAND = {
-  name: "Velseron",
-  tagline: "Precious metal, struck to be held.",
+  name: "LoveLWK.com",
+  tagline: "Pure Gold. Pure Silver. A Prosperous Tomorrow.",
   description:
-    "Serial-numbered gold and silver coins, assayed and delivered insured.",
+    "BIS Hallmarked gold & silver coins. Insured delivery across India. Premium gifting & investment.",
 } as const;
 
 export const CURRENCY = {
@@ -29,38 +29,44 @@ export function formatPrice(amount: number): string {
 }
 
 /**
- * PLACEHOLDER trust claims.
+ * LOVE LWK trust claims.
  * Each claim must be verified and substantiated before any public launch.
  */
 export const TRUST_CLAIMS = [
   {
-    id: "fineness",
-    label: "999.9 Fine",
-    description: "Refined to the highest standard of purity.",
-    isPlaceholder: true,
-  },
-  {
-    id: "assay",
-    label: "Assay Certified",
-    description: "Independent purity verification with every coin.",
-    isPlaceholder: true,
-  },
-  {
-    id: "serial",
-    label: "Serial Numbered",
-    description: "Each coin carries a unique serial for traceability.",
-    isPlaceholder: true,
-  },
-  {
-    id: "buyback",
-    label: "Buy-Back Guarantee",
-    description: "Sell back at transparent, market-linked rates.",
+    id: "bis",
+    label: "100% BIS Hallmarked",
+    description: "Government-certified purity guarantee.",
     isPlaceholder: true,
   },
   {
     id: "insured",
     label: "Insured Delivery",
     description: "Fully insured from vault to doorstep.",
+    isPlaceholder: true,
+  },
+  {
+    id: "secure",
+    label: "Secure Payments",
+    description: "PCI-DSS compliant payment processing.",
+    isPlaceholder: true,
+  },
+  {
+    id: "packaging",
+    label: "Premium Packaging",
+    description: "Tamper-proof, gift-ready presentation.",
+    isPlaceholder: true,
+  },
+  {
+    id: "returns",
+    label: "Easy Returns",
+    description: "7-day return on unopened seals.",
+    isPlaceholder: true,
+  },
+  {
+    id: "support",
+    label: "Dedicated Support",
+    description: "Expert guidance via chat, call, email.",
     isPlaceholder: true,
   },
 ] as const;

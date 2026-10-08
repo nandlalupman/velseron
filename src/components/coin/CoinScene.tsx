@@ -8,6 +8,7 @@ import { StudioEnvironment } from "./StudioEnvironment";
 import { useDeviceTier } from "@/hooks/useDeviceTier";
 import type { Metal } from "@/data/coins";
 import { cn } from "@/lib/cn";
+import { WebGLErrorBoundary } from "@/components/ui/WebGLErrorBoundary";
 
 interface CoinSceneProps {
   metal: Metal;
@@ -90,8 +91,11 @@ export function CoinScene({
             canvasReady ? "opacity-100" : "opacity-0"
           )}
           style={{ transitionDuration: "var(--dur-lg, 600ms)" }}
+          aria-label={`Interactive 3D model of Velseron ${metal} coin`}
+          role="region"
         >
-          <Canvas
+          <WebGLErrorBoundary fallbackMetal={metal}>
+            <Canvas
             camera={{
               fov: config.fov,
               position: config.cameraPos,
@@ -129,6 +133,7 @@ export function CoinScene({
               )}
             </Suspense>
           </Canvas>
+          </WebGLErrorBoundary>
         </div>
       )}
 

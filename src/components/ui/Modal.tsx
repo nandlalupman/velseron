@@ -4,6 +4,8 @@ import { useEffect, useRef, useCallback, type ReactNode } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/cn";
 import { TRANSITION } from "@/lib/motion";
+import { useState } from "react";
+import { createPortal } from "react-dom";
 
 interface ModalProps {
   open: boolean;
@@ -73,7 +75,12 @@ export function Modal({ open, onClose, children, className, label }: ModalProps)
     };
   }, [open, trapFocus]);
 
-  return (
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+
+  if (!mounted) return null;
+
+  return createPortal(
     <AnimatePresence>
       {open && (
         <div className="fixed inset-0 z-50 flex items-center justify-center">
@@ -109,7 +116,8 @@ export function Modal({ open, onClose, children, className, label }: ModalProps)
           </motion.div>
         </div>
       )}
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body
   );
 }
 

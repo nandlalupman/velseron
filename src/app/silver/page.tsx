@@ -1,13 +1,13 @@
 "use client";
 
 import { getCoinsByMetal } from "@/data/coins";
-import { SiteHeader } from "@/components/layout/SiteHeader";
-import { Footer } from "@/components/layout/Footer";
+import { CATEGORIES } from "@/data/categories";
 import { ProductCard } from "@/components/commerce/ProductCard";
 import { Reveal } from "@/components/ui/Reveal";
 import { ToastContainer } from "@/components/ui/Toast";
 import { useState } from "react";
 import { cn } from "@/lib/cn";
+import Link from "next/link";
 
 const WEIGHT_OPTIONS = [
   { label: "1 oz (31.1 g)", value: "31.1035" },
@@ -62,22 +62,18 @@ export default function SilverPage() {
   return (
     <div data-metal="silver">
       <ToastContainer />
-      <SiteHeader />
-
-      {/* Header */}
-      <section className="pt-32 pb-12 bg-bg border-b border-line">
+      {/* Hero Header */}
+      <section className="py-12 bg-ink-0 border-b border-silver-700/30">
         <div className="max-w-[var(--grid-max)] mx-auto px-[var(--grid-gutter)]">
           <Reveal>
-            <p className="font-mono-label text-accent mb-3 text-[10px]">
-              SILVER COLLECTION
-            </p>
+            <p className="font-mono-label text-silver-500 text-xs font-semibold uppercase tracking-widest mb-3">SILVER COLLECTION</p>
             <h1
-              className="font-[family-name:var(--font-display)] text-ivory mb-4"
-              style={{ fontSize: "clamp(2.5rem, 5vw, 4rem)" }}
+              className="font-[family-name:var(--font-display)] text-white mb-4"
+              style={{ fontSize: "clamp(1.75rem, 4vw, 2.75rem)" }}
             >
               Silver coins
             </h1>
-            <p className="text-ivory-mute max-w-lg">
+            <p className="text-white/60 max-w-lg text-sm">
               Fine silver coins from 1 troy ounce to 100 grams. Precision struck,
               serial-numbered and assay certified.
             </p>
@@ -85,8 +81,27 @@ export default function SilverPage() {
         </div>
       </section>
 
+      {/* Category Quick Links */}
+      <section className="py-4 bg-light-surface border-b border-light-border">
+        <div className="max-w-[var(--grid-max)] mx-auto px-[var(--grid-gutter)]">
+          <div className="flex flex-wrap gap-3" role="navigation" aria-label="Silver sub-categories">
+            {CATEGORIES
+              .filter(c => c.metal === "silver" || c.metal === "both")
+              .map((category) => (
+                <Link
+                  key={category.id}
+                  href={category.href}
+                  className="px-4 py-2 text-sm bg-white border border-line rounded-[var(--radius-pill)] hover:border-silver-500/50 hover:text-silver-400 transition-colors"
+                >
+                  {category.label}
+                </Link>
+              ))}
+          </div>
+        </div>
+      </section>
+
       {/* Content: filter rail + grid */}
-      <section className="py-section bg-bg">
+      <section className="py-section bg-white">
         <div className="max-w-[var(--grid-max)] mx-auto px-[var(--grid-gutter)] grid grid-cols-1 lg:grid-cols-[240px_1fr] gap-8">
           {/* Filter rail — left sidebar */}
           <aside className="hidden lg:block">
@@ -178,7 +193,7 @@ export default function SilverPage() {
                 <select
                   value={sortBy}
                   onChange={(e) => setSortBy(e.target.value)}
-                  className="w-full bg-surface border border-line text-ivory text-sm px-3 py-2 rounded-[var(--radius-sharp)] cursor-pointer focus:outline-none focus:border-accent"
+                  className="w-full bg-white border border-light-border text-dark-text text-sm px-3 py-2 rounded-lg cursor-pointer focus:outline-none focus:border-accent"
                 >
                   {SORT_OPTIONS.map((o) => (
                     <option key={o.value} value={o.value}>
@@ -192,7 +207,7 @@ export default function SilverPage() {
 
           {/* Grid — silver uses 3-4 columns, spec-forward */}
           <div>
-            <p className="font-mono-label text-ivory-mute text-[10px] mb-6">
+            <p className="text-muted-text text-sm mb-6">
               {coins.length} {coins.length === 1 ? "COIN" : "COINS"}
             </p>
 
@@ -206,14 +221,11 @@ export default function SilverPage() {
               </div>
             ) : (
               <div className="text-center py-24">
-                <p className="text-ivory-mute">No coins match your filters.</p>
+                <p className="text-muted-text">No coins match your filters.</p>
               </div>
             )}
           </div>
         </div>
-      </section>
-
-      <Footer />
-    </div>
+      </section>    </div>
   );
 }

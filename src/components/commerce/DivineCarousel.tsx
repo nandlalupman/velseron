@@ -39,7 +39,7 @@ export function DivineCarousel() {
       <div className="absolute top-1/2 left-2 -translate-y-1/2 z-10 hidden md:block">
         <button 
           onClick={scrollLeft}
-          className="w-9 h-9 rounded-full bg-ink-1/90 border border-line flex items-center justify-center text-ivory hover:border-accent hover:text-accent transition-colors backdrop-blur-sm cursor-pointer"
+          className="w-11 h-11 rounded-full bg-ink-1/90 border border-line flex items-center justify-center text-ivory hover:border-accent hover:text-accent transition-colors backdrop-blur-sm cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
           aria-label="Previous coin"
         >
           ←
@@ -49,7 +49,7 @@ export function DivineCarousel() {
       <div className="absolute top-1/2 right-2 -translate-y-1/2 z-10 hidden md:block">
         <button 
           onClick={scrollRight}
-          className="w-9 h-9 rounded-full bg-ink-1/90 border border-line flex items-center justify-center text-ivory hover:border-accent hover:text-accent transition-colors backdrop-blur-sm cursor-pointer"
+          className="w-11 h-11 rounded-full bg-ink-1/90 border border-line flex items-center justify-center text-ivory hover:border-accent hover:text-accent transition-colors backdrop-blur-sm cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
           aria-label="Next coin"
         >
           →
@@ -68,7 +68,7 @@ export function DivineCarousel() {
             onClick={() => setActiveId(coin.id)}
             className={cn(
               "relative flex-shrink-0 w-[140px] md:w-[170px] flex flex-col items-center",
-              "p-4 rounded-lg snap-center transition-all duration-300 cursor-pointer",
+              "p-4 rounded-lg snap-center transition-all duration-300 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent",
               "border",
               activeId === coin.id 
                 ? "border-accent/50 bg-ink-1 shadow-[0_0_20px_rgba(201,162,75,0.12)] -translate-y-1" 

@@ -51,7 +51,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           "font-[family-name:var(--font-body)] font-medium tracking-wide",
           "rounded-[var(--radius-sharp)] cursor-pointer select-none",
           "transition-colors duration-[var(--dur-sm)]",
-          "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent",
+          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg",
           "disabled:opacity-40 disabled:pointer-events-none",
           "overflow-hidden",
 

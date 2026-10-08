@@ -38,6 +38,8 @@ export function HeroStage({ className }: HeroStageProps) {
         className
       )}
       style={{ aspectRatio: "1 / 1", minHeight: "360px" }}
+      aria-live="polite"
+      aria-atomic="true"
     >
       {/* Radial glow */}
       <div

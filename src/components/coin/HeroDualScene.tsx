@@ -3,10 +3,11 @@
 import { useState, useEffect, useCallback } from "react";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
-import { CoinMesh } from "./CoinMesh";
+import { DivineCoinMesh } from "./DivineCoinMesh";
 import { StudioEnvironment } from "./StudioEnvironment";
 import { useDeviceTier } from "@/hooks/useDeviceTier";
 import { cn } from "@/lib/cn";
+import { WebGLErrorBoundary } from "@/components/ui/WebGLErrorBoundary";
 
 export function HeroDualScene({ className }: { className?: string }) {
   const { tier } = useDeviceTier();
@@ -49,54 +50,64 @@ export function HeroDualScene({ className }: { className?: string }) {
             canvasReady ? "opacity-100" : "opacity-0"
           )}
           style={{ transitionDuration: "1000ms" }}
+          aria-label="Interactive 3D model of Lakshmi gold and Ganesha silver coins"
+          role="region"
         >
-          <Canvas
-            camera={{
-              fov: 40,
-              position: [0, 1.5, 6],
-              near: 0.1,
-              far: 100,
-            }}
-            gl={{
-              antialias: tier === "A",
-              alpha: true,
-              powerPreference: "high-performance",
-              preserveDrawingBuffer: true,
-            }}
-            dpr={tier === "A" ? [1, 2] : 1}
-            onCreated={handleCreated}
-            style={{ background: "transparent", pointerEvents: "auto" }}
-          >
-            <StudioEnvironment metal="gold" quality={quality} />
-            
-            <ambientLight intensity={0.2} />
-            <directionalLight position={[5, 5, 5]} intensity={1} castShadow />
+          <WebGLErrorBoundary fallbackMetal="gold">
+            <Canvas
+              camera={{
+                fov: 40,
+                position: [0, 1.5, 6],
+                near: 0.1,
+                far: 100,
+              }}
+              gl={{
+                antialias: tier === "A",
+                alpha: true,
+                powerPreference: "high-performance",
+                preserveDrawingBuffer: true,
+              }}
+              dpr={tier === "A" ? [1, 2] : 1}
+              onCreated={handleCreated}
+              style={{ background: "transparent", pointerEvents: "auto" }}
+            >
+              <StudioEnvironment metal="gold" quality={quality} />
+              
+              <ambientLight intensity={0.2} />
+              <directionalLight position={[5, 5, 5]} intensity={1} castShadow />
 
-            <group position={[-0.8, -0.2, 0.5]}>
-              <CoinMesh
-                metal="gold"
-                autoRotate
-                rotateSpeed={0.3}
+              {/* Lakshmi Gold Coin - Left, slightly lower */}
+              <group position={[-1.2, -0.3, 0.5]}>
+                <DivineCoinMesh
+                  metal="gold"
+                  deity="lakshmi"
+                  autoRotate
+                  rotateSpeed={0.3}
+                  initialFace="obverse"
+                />
+              </group>
+
+              {/* Ganesha Silver Coin - Right, slightly higher */}
+              <group position={[1.2, 0.3, -0.5]}>
+                <DivineCoinMesh
+                  metal="silver"
+                  deity="ganesha"
+                  autoRotate
+                  rotateSpeed={-0.25}
+                  initialFace="obverse"
+                />
+              </group>
+
+              <OrbitControls
+                enableZoom={false}
+                enablePan={false}
+                enableDamping
+                dampingFactor={0.05}
+                minPolarAngle={Math.PI / 4}
+                maxPolarAngle={Math.PI / 1.5}
               />
-            </group>
-
-            <group position={[0.8, 0.2, -0.5]}>
-              <CoinMesh
-                metal="silver"
-                autoRotate
-                rotateSpeed={-0.2}
-              />
-            </group>
-
-            <OrbitControls
-              enableZoom={false}
-              enablePan={false}
-              enableDamping
-              dampingFactor={0.05}
-              minPolarAngle={Math.PI / 4}
-              maxPolarAngle={Math.PI / 1.5}
-            />
-          </Canvas>
+            </Canvas>
+          </WebGLErrorBoundary>
         </div>
       )}
     </div>

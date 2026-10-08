@@ -2,8 +2,7 @@
 
 import { useParams } from "next/navigation";
 import { getCoinBySlug, COINS } from "@/data/coins";
-import { SiteHeader } from "@/components/layout/SiteHeader";
-import { Footer } from "@/components/layout/Footer";
+
 import { Button } from "@/components/ui/Button";
 import { Accordion } from "@/components/ui/Accordion";
 import { SegmentedControl } from "@/components/ui/SegmentedControl";
@@ -45,10 +44,9 @@ export default function ProductPage() {
   if (!coin) {
     return (
       <div data-metal="gold">
-        <SiteHeader />
-        <div className="min-h-screen flex items-center justify-center bg-bg">
+        <div className="min-h-screen flex items-center justify-center bg-white">
           <div className="text-center">
-            <h1 className="font-display text-ivory mb-4" style={{ fontSize: "2rem" }}>
+            <h1 className="font-[family-name:var(--font-display)] text-dark-text mb-4" style={{ fontSize: "2rem" }}>
               Coin not found
             </h1>
             <Link href="/">
@@ -56,7 +54,6 @@ export default function ProductPage() {
             </Link>
           </div>
         </div>
-        <Footer />
       </div>
     );
   }
@@ -106,25 +103,23 @@ export default function ProductPage() {
   return (
     <div data-metal={coin.metal}>
       <ToastContainer />
-      <SiteHeader />
 
       {/* Breadcrumb */}
-      <div className="pt-24 pb-4 bg-bg">
+      <div className="py-4 bg-white border-b border-light-border">
         <div className="max-w-[var(--grid-max)] mx-auto px-[var(--grid-gutter)]">
-          <nav className="font-mono-label text-ivory-mute text-[10px]" aria-label="Breadcrumb">
-            <Link href="/" className="hover:text-ivory transition-colors">HOME</Link>
+          <nav className="text-muted-text text-xs" aria-label="Breadcrumb">
+            <Link href="/" className="hover:text-dark-text transition-colors">Home</Link>
             <span className="mx-2">/</span>
-            <Link href={`/${coin.metal}`} className="hover:text-ivory transition-colors">
-              {coin.metal.toUpperCase()}
+            <Link href={`/${coin.metal}`} className="hover:text-dark-text transition-colors capitalize">
+              {coin.metal}
             </Link>
             <span className="mx-2">/</span>
-            <span className="text-ivory">{coin.name.toUpperCase()}</span>
+            <span className="text-dark-text font-medium">{coin.name}</span>
           </nav>
         </div>
       </div>
 
-      {/* Main content */}
-      <section className="bg-bg pb-section">
+      <section className="bg-white pb-section">
         <div className="max-w-[var(--grid-max)] mx-auto px-[var(--grid-gutter)] grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
           {/* Left: Sticky stage — 7 cols */}
           <div className="lg:col-span-7">
@@ -423,8 +418,6 @@ export default function ProductPage() {
           </Button>
         )}
       </div>
-
-      <Footer />
     </div>
   );
 }

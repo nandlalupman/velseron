@@ -1,13 +1,13 @@
 "use client";
 
 import { getCoinsByMetal } from "@/data/coins";
-import { SiteHeader } from "@/components/layout/SiteHeader";
-import { Footer } from "@/components/layout/Footer";
+import { CATEGORIES } from "@/data/categories";
 import { ProductCard } from "@/components/commerce/ProductCard";
 import { Reveal } from "@/components/ui/Reveal";
 import { ToastContainer } from "@/components/ui/Toast";
 import { useState } from "react";
 import { cn } from "@/lib/cn";
+import Link from "next/link";
 
 const WEIGHT_FILTERS = [
   { label: "All", value: "all" },
@@ -51,22 +51,18 @@ export default function GoldPage() {
   return (
     <div data-metal="gold">
       <ToastContainer />
-      <SiteHeader />
-
-      {/* Header */}
-      <section className="pt-32 pb-12 bg-bg border-b border-line">
+      {/* Hero Header */}
+      <section className="py-12 bg-ink-0 border-b border-gold-700/20">
         <div className="max-w-[var(--grid-max)] mx-auto px-[var(--grid-gutter)]">
           <Reveal>
-            <p className="font-mono-label text-accent mb-3 text-[10px]">
-              GOLD COLLECTION
-            </p>
+            <p className="font-mono-label text-gold-500 text-[10px] mb-3">GOLD COLLECTION</p>
             <h1
-              className="font-[family-name:var(--font-display)] text-ivory mb-4"
-              style={{ fontSize: "clamp(2.5rem, 5vw, 4rem)" }}
+              className="font-[family-name:var(--font-display)] text-white mb-4"
+              style={{ fontSize: "clamp(1.75rem, 4vw, 2.75rem)" }}
             >
-              Gold coins
+              Gold Coins
             </h1>
-            <p className="text-ivory-mute max-w-lg">
+            <p className="text-white/60 max-w-lg text-sm">
               24-karat gold coins in weights from 5 grams to 1 troy ounce. Each coin is
               individually assayed, serial-numbered and delivered insured.
             </p>
@@ -74,8 +70,27 @@ export default function GoldPage() {
         </div>
       </section>
 
+      {/* Category Quick Links */}
+      <section className="py-4 bg-light-surface border-b border-light-border">
+        <div className="max-w-[var(--grid-max)] mx-auto px-[var(--grid-gutter)]">
+          <div className="flex flex-wrap gap-3" role="navigation" aria-label="Gold sub-categories">
+            {CATEGORIES
+              .filter(c => c.metal === "gold" || c.metal === "both")
+              .map((category) => (
+                <Link
+                  key={category.id}
+                  href={category.href}
+                  className="px-5 py-2 text-sm bg-white border border-light-border text-dark-text rounded-full hover:border-gold-500 hover:text-gold-600 transition-colors font-medium"
+                >
+                  {category.label}
+                </Link>
+              ))}
+          </div>
+        </div>
+      </section>
+
       {/* Filter bar — horizontal chips */}
-      <section className="sticky top-16 z-30 bg-bg/95 backdrop-blur-sm border-b border-line">
+      <section className="sticky top-16 z-30 bg-white/95 backdrop-blur-sm border-b border-light-border">
         <div className="max-w-[var(--grid-max)] mx-auto px-[var(--grid-gutter)] py-3 flex items-center gap-4 overflow-x-auto">
           {/* Weight chips */}
           <div className="flex items-center gap-2 shrink-0">
@@ -84,10 +99,10 @@ export default function GoldPage() {
                 key={f.value}
                 onClick={() => setWeightFilter(f.value)}
                 className={cn(
-                  "px-3 py-1.5 text-xs font-mono-label rounded-[var(--radius-pill)] border transition-colors cursor-pointer",
+                  "px-4 py-1.5 text-xs rounded-full border transition-colors cursor-pointer font-medium",
                   weightFilter === f.value
-                    ? "bg-accent/15 border-accent text-accent"
-                    : "border-line text-ivory-mute hover:text-ivory hover:border-ivory-mute/30"
+                    ? "bg-gold-600 border-gold-600 text-white"
+                    : "border-light-border text-muted-text hover:text-dark-text hover:border-gold-500"
                 )}
               >
                 {f.label}
@@ -98,7 +113,7 @@ export default function GoldPage() {
           <div className="w-px h-6 bg-line shrink-0" />
 
           {/* Hide out of stock */}
-          <label className="flex items-center gap-2 text-ivory-mute text-xs cursor-pointer shrink-0">
+          <label className="flex items-center gap-2 text-muted-text text-xs cursor-pointer shrink-0">
             <input
               type="checkbox"
               checked={hideOutOfStock}
@@ -114,7 +129,7 @@ export default function GoldPage() {
           <select
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value)}
-            className="bg-surface border border-line text-ivory text-xs px-3 py-1.5 rounded-[var(--radius-sharp)] cursor-pointer focus:outline-none focus:border-accent"
+            className="bg-white border border-light-border text-dark-text text-xs px-3 py-1.5 rounded-lg cursor-pointer focus:outline-none focus:border-gold-500"
           >
             {SORT_OPTIONS.map((o) => (
               <option key={o.value} value={o.value}>
@@ -125,15 +140,14 @@ export default function GoldPage() {
         </div>
       </section>
 
-      {/* Grid — gold uses 2-column editorial layout */}
-      <section className="py-section bg-bg">
+      <section className="py-section bg-white">
         <div className="max-w-[var(--grid-max)] mx-auto px-[var(--grid-gutter)]">
-          <p className="font-mono-label text-ivory-mute text-[10px] mb-6">
+        <p className="text-muted-text text-sm mb-6">
             {coins.length} {coins.length === 1 ? "COIN" : "COINS"}
           </p>
 
           {coins.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {coins.map((coin, i) => (
                 <Reveal key={coin.id} stagger={i}>
                   <ProductCard coin={coin} />
@@ -142,13 +156,10 @@ export default function GoldPage() {
             </div>
           ) : (
             <div className="text-center py-24">
-              <p className="text-ivory-mute">No coins match your filters.</p>
+              <p className="text-muted-text">No coins match your filters.</p>
             </div>
           )}
         </div>
-      </section>
-
-      <Footer />
-    </div>
+      </section>    </div>
   );
 }

@@ -14,11 +14,8 @@ export function DevBanner({ message }: DevBannerProps) {
       role="status"
       aria-label="Development notice"
       style={{
-        position: "fixed",
-        top: 0,
-        left: 0,
-        right: 0,
-        zIndex: 9999,
+        position: "relative",
+        zIndex: 60,
         padding: "6px 16px",
         backgroundColor: "var(--warn)",
         color: "var(--ink-0)",

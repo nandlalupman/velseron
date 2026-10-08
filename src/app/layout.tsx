@@ -4,6 +4,10 @@ import "./globals.css";
 import { BRAND, PLACEHOLDER_NOTICE } from "@/lib/config";
 import { DevBanner } from "@/components/layout/DevBanner";
 import { CustomCursor } from "@/components/effects/CustomCursor";
+import { TopBar } from "@/components/layout/TopBar";
+import { SiteHeader } from "@/components/layout/SiteHeader";
+import { Footer } from "@/components/layout/Footer";
+import { IntroVideo } from "@/components/effects/IntroVideo";
 
 const bodoniModa = Bodoni_Moda({
   subsets: ["latin"],
@@ -35,21 +39,25 @@ export const metadata: Metadata = {
   description: BRAND.description,
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html
       lang="en"
       data-metal="gold"
       className={`${bodoniModa.variable} ${hankenGrotesk.variable} ${ibmPlexMono.variable}`}
     >
-      <body style={{ ["--banner-offset" as string]: "24px" }}>
+      <body>
         <a href="#main-content" className="skip-link">
           Skip to content
         </a>
         <DevBanner message={PLACEHOLDER_NOTICE} />
+        <IntroVideo />
+        <TopBar />
+        <SiteHeader />
         <div id="main-content">
           {children}
         </div>
+        <Footer />
         <CustomCursor />
       </body>
     </html>
